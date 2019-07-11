@@ -4,14 +4,37 @@
 <head>
     <meta charset="UTF-8" />
     <title th:text="${userModel.title}">Title</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{../../static/css/bootstrap.min.css}" rel="stylesheet"/>
+
+    <!-- Custom styles -->
+    <link href="../../static/css/blog.css" rel="stylesheet"/>
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
+
+    <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button"
+                    data-toggle="collapse" data-target="#navbarsContainer">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/" style="color: white">JuniorsBlog</a>
+            <div class="collapse navbar-collapse" id="navbarsContainer">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users">首页<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container blog-content-container">
+    <br/>
 
 <div>
-    <a href="/users/form.html" th:href="@{/users/form}">创建用户</a>
+    <a class="btn btn-primary" href="/users/form.html" th:href="@{/users/form}">创建用户</a>
 </div>
-<table border="1">
+<table class="table table-striped">
     <thead>
     <tr>
         <td>ID</td>
@@ -31,6 +54,12 @@
     </thead>
 </table>
 
-<div th:replace="fragments/footer :: footer"></div>
+
+    </div>
+    <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
+        <div class="container">
+            <a class="navbar-brand" href="/" style="color: white;text-align: center">Welcome to Juniors.com</a>
+        </div>
+    </nav>
 </body>
 </html>
