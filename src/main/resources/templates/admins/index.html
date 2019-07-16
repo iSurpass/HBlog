@@ -6,10 +6,10 @@
     <meta charset="UTF-8"/>
     <title>Title</title>
     <!-- Bootstrap core CSS -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom styles -->
-    <link href="../static/css/blog.css" rel="stylesheet"/>
+    <link href="../../static/css/blog.css" rel="stylesheet"/>
 </head>
 <body>
 <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
@@ -34,13 +34,6 @@
 
             </ul>
             <div sec:authorize="isAuthenticated()"  class="row" >
-                <div class="dropdown">
-                    <a class=" dropdown-toggle" href="/u/waylau" th:href="@{'/u/' + ${#authentication.name}}" data-toggle="dropdown"><span sec:authentication="name"></span></a>
-                    <div class="dropdown-menu" >
-                        <a class=" dropdown-item" href="/u/waylau" th:href="@{'/u/' + ${#authentication.name}}">个人主页</a>
-                        <a class="dropdown-item" href="/u/waylau/profile" th:href="@{'/u/' + ${#authentication.name} + '/profile'}" >个人设置</a>
-                    </div>
-                </div>
                 <form action="/logout" th:action="@{/logout}" method="post">
                     <input class="btn btn-outline-success " type="submit" value="退出"/>
                 </form>
@@ -54,16 +47,29 @@
 </nav>
 <div class="container blog-content-container">
     <br/>
+    <div class="row">
+        <!-- 左侧栏目 -->
+        <div class="col-md-4 col-xl-3">
+            <!-- 分类 -->
+            <div class="card ">
+                <h5 class="card-header"><i class="fa fa-bars" aria-hidden="true"></i> 菜单</h5>
 
-    <div sec:authorize="isAuthenticated()">
-        <p>已有用户登录</p>
-        <p>登录用户:<span sec:authentication="name"></span></p>
-        <p>用户角色:<span sec:authentication="principal.authorities"></span></p>
-    </div>
+                <ul class="list-group blog-menu"  th:each="menu : ${model.list}">
+                    <a href="javascript:void(0)" class="list-group-item "  th:title="${menu.name}" th:text="${menu.name}"
+                       data-th-attr="url=${menu.url}">
+                        用户管理
+                    </a>
+                </ul>
+            </div>
 
-    <div sec:authorize="isAnonymous()">
-        <p>未有用户登录</p>
+        </div>
+        <!-- 右侧栏目 -->
+        <div class="col-md-8 col-xl-9">
+            <div class="card" id="rightContainer">
+            </div>
+        </div>
     </div>
+</div>
 
 <br/>
 <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
@@ -71,6 +77,16 @@
         <a class="navbar-brand" href="/" style="color: white;text-align: center">Welcome to Juniors.com</a>
     </div>
 </nav>
-</div>
 </body>
+
+<script type="text/javascript">
+
+    $(".blog-menu .list-group-item").click(function () {
+
+        var  url = $(this).attr("url");
+
+
+    });
+
+</script>
 </html>
